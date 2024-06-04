@@ -1,0 +1,113 @@
+name: node_app
+
+on:
+  push:
+    branches:
+      - main
+#    tags:
+#      - 'v*'
+
+env:
+  IMAGE_TAG: 12sergey12/myapp
+  RELEASE_NAME: nginx-1.0.0.tgz
+  NAMESPACE: monitoring
+
+jobs:
+  build-and-push:
+    name: Build Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ env.IMAGE_TAG }}:${{ github.ref_name }}
+
+  deploy:
+    needs: build-and-push
+    name: Deploy to Kubernetes
+    if: startsWith(github.event.head_commit.message, 'v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure Kubernetes CLI
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
+      - name: Deploy to Kubernetes apply
+        run: |
+          kubectl apply -f ./myapp/deploy.yaml
+#          helm upgrade nginx ./nginx-1.0.0.tgz#name: Production Deployment
+#on:
+#  push:
+#    branches: [main]
+#jobs:
+ 
+#jobs:
+#  push_to_registry:
+#    name: Push Docker image to Docker Hub
+#    runs-on: [self-hosted]
+#    permissions:
+#      packages: write
+#      contents: read
+#      
+#    steps:
+#      - name: Check out the repo
+#        uses: actions/checkout@v4
+
+#      - name: Log in to Docker Hub
+#        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+#        with:
+#          username: ${{ secrets.DOCKER_USERNAME }}
+#          password: ${{ secrets.DOCKER_PASSWORD }}
+
+#      - name: Extract metadata (tags, labels) for Docker
+#        id: meta
+#        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+#        with:
+#          images: my-docker-hub-namespace/my-docker-hub-repository
+#
+ #     - name: Build and push Docker image
+ #       id: push
+ #       uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+ #       with:
+ #         context: .
+ #         file: ./Dockerfile
+ #         push: true
+ #         tags: ${{ steps.meta.outputs.tags }}
+ #         labels: ${{ steps.meta.outputs.labels }}
+  
+#  converge:
+#    name: Converge
+#    runs-on: ubuntu-latest
+#    steps:
+
+#      - name: Checkout code
+#        uses: actions/checkout@v4
+#        with:
+#          fetch-depth: 0
+
+#      - name: Converge
+#        uses: werf/actions/converge@v1.2
+#        with:
+#          env: production
+#          kube-config-base64-data: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
+#        env:
+#          WERF_SET_ENV_URL: "envUrl=http://habrapp.example.com"
+
+
+
