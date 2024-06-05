@@ -7,7 +7,7 @@ on:
 
 env:
   IMAGE_TAG: 12sergey12/myapp
-  RELEASE_NAME: nginx-release
+  RELEASE_NAME: myapp
   NAMESPACE: monitoring
 
 jobs:
