@@ -1,4 +1,4 @@
-name: node_app
+name: myapp
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 env:
   IMAGE_TAG: 12sergey12/myapp
-  RELEASE_NAME: nginx-1.0.0.tgz
+  RELEASE_NAME: nginx-release
   NAMESPACE: monitoring
 
 jobs:
@@ -22,21 +22,21 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Set up Docker Buildx
+      - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
-
+# 
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ env.IMAGE_TAG }}:${{ github.ref_name }}
+          tags: ${{ env.IMAGE_TAG }}:${{ env.VERSION }}
 
   deploy:
     needs: build-and-push
     name: Deploy to Kubernetes
-    if: startsWith(github.event.head_commit.message)
+    if: startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref, 'refs/tags')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
