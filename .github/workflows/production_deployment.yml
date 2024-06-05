@@ -23,22 +23,14 @@ jobs:
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
-      - name: Extract version from commit messages
-        run: |
-          VERSION=$(git log -1 --pretty=format:%s | grep -oP 'v\d+\.\d+\.\d+')
-          if [[ ! -z "$VERSION" ]]; then
-            echo "VERSION=$VERSION" >> $GITHUB_ENV
-          else
-            echo "No version found in the commit message"
-            exit 
-          fi
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ env.IMAGE_TAG }}:${{ env.VERSION }}
+          tags: ${{ env.IMAGE_TAG }}:${{ github.ref_name }}
 
   deploy:
     needs: build-and-push
