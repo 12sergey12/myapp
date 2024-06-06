@@ -47,7 +47,7 @@ jobs:
           kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
       - name: Deploy to Kubernetes apply
         run: |
-          kubectl apply -f ./myapp/deploy.yaml         
+          apply -f ./myapp/deploy.yaml         
 #          helm upgrade nginx ./nginx-1.0.0.tgz#name: Production Deployment
 #on:
 #  push:
