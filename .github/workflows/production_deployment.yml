@@ -45,6 +45,12 @@ jobs:
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Kubeconfig
+        uses: azure/setup-kubectl@v1
+        with:
+          version: '1.18.0'    
       - name: Deploy to Kubernetes apply
         run: |
           kubectl apply -f ./deploy.yaml         
