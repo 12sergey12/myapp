@@ -39,18 +39,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - name: Configure Kubernetes CLI
-        uses: azure/k8s-set-context@v4
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
-      - name: Checkout
         uses: actions/checkout@v2
+
       - name: Set up Kubeconfig
         uses: azure/setup-kubectl@v1
         with:
-          version: '1.18.0'    
+          version: '1.18.0'          
+#        uses: actions/checkout@v4
+#      - name: Configure Kubernetes CLI
+#        uses: azure/k8s-set-context@v4
+#        with:
+#          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
       - name: Deploy to Kubernetes apply
         run: |
           kubectl apply -f ./deploy.yaml         
