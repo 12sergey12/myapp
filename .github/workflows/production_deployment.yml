@@ -44,7 +44,7 @@ jobs:
         uses: azure/k8s-set-context@v4
         with:
           method: kubeconfig
-          kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
+          kube-config-base64-data: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
       - name: Deploy to Kubernetes apply
         run: |
           kubectl apply -f myapp/deploy.yaml
