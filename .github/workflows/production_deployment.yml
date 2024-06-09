@@ -54,6 +54,9 @@ jobs:
         with:
           version: 'v1.18.0'
 
+      - name: Create kubeconfig
+        run: |
+          mkdir -p $HOME/.kube/
       - name: Authenticate to Kubernetes cluster
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
