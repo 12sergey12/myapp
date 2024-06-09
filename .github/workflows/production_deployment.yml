@@ -60,14 +60,14 @@ jobs:
 #        with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
-#      - name: Checkout code
-#        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
 #          fetch-depth: 0
 #      - name: Converge
 #        uses: werf/actions/converge@v1.2
 #        with:
-#          env: production
+          env: production
           kube-config-base64-data: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
         env:
 #          WERF_SET_ENV_URL: "envUrl=http://158.160.62.182:30080"
