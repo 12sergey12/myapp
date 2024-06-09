@@ -66,7 +66,7 @@ jobs:
       - name: Configure Kubernetes CLI
         uses: azure/k8s-set-context@v4
         with:
-          method: kubeconfig
+#          method: kubeconfig
           kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
 #      - name: Checkout code
 #        uses: actions/checkout@v4
