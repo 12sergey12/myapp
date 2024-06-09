@@ -31,7 +31,6 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ env.IMAGE_TAG }}:${{ github.ref_name }}
-# ======
   deploy:
     needs: build-and-push
     name: Deploy to Kubernetes
@@ -72,7 +71,6 @@ jobs:
 #        env:
       - name: Deploy to Kubernetes apply
         run: |
-#          kubectl get pod,svc,deployment -n monitoring
           kubectl apply -f ./myapp/deploy.yaml         
 #          helm upgrade nginx ./nginx-1.0.0.tgz#name: Production Deployment
 #on:
