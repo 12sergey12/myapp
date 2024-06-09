@@ -20,8 +20,16 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Setup Docker Build
+      - name: version from commit messages
+        run: |
+          VERSION=$(git log -1 --pretty=format:%s )
+          if [[ ! -z "$VERSION" ]]; then
+            echo "VERSION=$VERSION" >> $GITHUB_ENV
+          else
+            echo "No version found in the commit message"
+            exit 1
+          fi
+      - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
 
       - name: Build and push
@@ -39,26 +47,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-#      - name: Download repository
-#        uses: actions/download-artifact@v2
-#        with:
-#          name: repository
+      - name: Download repository
+        uses: actions/download-artifact@v2
+        with:
+          name: repository
       - name: Create kube config
         run: |
           mkdir -p $HOME/.kube/
           echo "${{ secrets.KUBE_CONFIG_BASE64_DATA }}" > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
-#      - name: Install helm
       - name: Set up Kubeconfig
-        uses: azure/setup-kubectl@v4
-#        with:
-#          version: '1.19.0'          
-#        uses: actions/checkout@v4
-#      - name: Configure Kubernetes CLI
-#        uses: azure/k8s-set-context@v4
-#        with:
-#          method: kubeconfig
-#          kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
+        uses: azure/setup-kubectl@v4   
+      - name: Checkout      
+        uses: actions/checkout@v4
+      - name: Configure Kubernetes CLI
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
 #      - name: Checkout code
 #        uses: actions/checkout@v4
 #        with:
@@ -69,9 +75,9 @@ jobs:
 #          env: production
 #          kube-config-base64-data: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
 #        env:
-      - name: Deploy to Kubernetes apply
-        run: |
-          kubectl apply -f ./myapp/deploy.yaml         
+#      - name: Deploy to Kubernetes apply
+#        run: |
+#          kubectl apply -f ./myapp/deploy.yaml         
 #          helm upgrade nginx ./nginx-1.0.0.tgz#name: Production Deployment
 #on:
 #  push:
