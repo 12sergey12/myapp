@@ -60,7 +60,7 @@ jobs:
         uses: azure/setup-kubectl@v4   
       - name: Checkout      
         uses: actions/checkout@v4
-      - name: Configure Kubernetes CLI
+#      - name: Configure Kubernetes CLI
 #        uses: azure/k8s-set-context@v4
 #        with:
 #          method: kubeconfig
@@ -68,11 +68,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+#          fetch-depth: 0
 #      - name: Converge
 #        uses: werf/actions/converge@v1.2
 #        with:
-          env: production
+#          env: production
           kube-config-base64-data: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
 #        env:
       - name: Deploy to Kubernetes apply
