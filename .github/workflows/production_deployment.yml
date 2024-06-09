@@ -52,11 +52,11 @@ jobs:
 #        uses: actions/download-artifact@v2
 #        with:
 #          name: repository
-      - name: Create kubeconfig
-        run: |
-          mkdir -p $HOME/.kube/
-          echo "${{ secrets.KUBE_CONFIG_BASE64_DATA }}" > $HOME/.kube/config
-          chmod 600 $HOME/.kube/config
+#      - name: Create kubeconfig
+#        run: |
+#          mkdir -p $HOME/.kube/
+#          echo "${{ secrets.KUBE_CONFIG_BASE64_DATA }}" > $HOME/.kube/config
+#          chmod 600 $HOME/.kube/config
       - name: Setup Kubeconfig
         uses: azure/setup-kubectl@v4   
 #        uses: azure/setup-kubectl@v1
@@ -66,7 +66,7 @@ jobs:
 #        uses: azure/k8s-set-context@v4
         with:
           method: kubeconfig
-#          kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
+          kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
 #      - name: Checkout code
 #        uses: actions/checkout@v4
 #        with:
@@ -77,7 +77,7 @@ jobs:
 #          env: production
 #          method: kubeconfig
 #          kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
-          kube-config-base64-data: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
+#          kube-config-base64-data: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
 #        env:
       - name: Deploy to Kubernetes apply
         run: |
