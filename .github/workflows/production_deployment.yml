@@ -59,7 +59,7 @@ jobs:
           chmod 600 $HOME/.kube/config
       - name: Setup Kubeconfig
         uses: azure/setup-kubectl@v4   
-        uses: azure/setup-kubectl@v1
+#        uses: azure/setup-kubectl@v1
 #      - name: Checkout      
 #        uses: actions/checkout@v4
 #      - name: Configure Kubernetes CLI
