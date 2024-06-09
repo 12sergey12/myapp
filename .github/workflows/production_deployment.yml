@@ -58,8 +58,8 @@ jobs:
 #          echo "${{ secrets.KUBE_CONFIG_BASE64_DATA }}" > $HOME/.kube/config
 #          chmod 600 $HOME/.kube/config
 
-      - name: Setup Kubeconfig
-        uses: azure/setup-kubectl@v4 
+#      - name: Setup Kubeconfig
+#        uses: azure/setup-kubectl@v4 
 
 #      - name: Checkout      
 #        uses: actions/checkout@v4
@@ -108,7 +108,7 @@ jobs:
 #            kubectl apply -f ./myapp/deploy.yaml
       - name: Deploy to Kubernetes apply
         run: |
-          KUBECONFIG=$HOME/.kube/config
+#          KUBECONFIG=$HOME/.kube/config
           kubectl apply -f ./myapp/deploy.yaml         
 #          helm upgrade nginx ./nginx-1.0.0.tgz#name: Production Deployment
 #on:
