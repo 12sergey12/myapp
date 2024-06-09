@@ -70,7 +70,6 @@ jobs:
 #          env: production
 #          kube-config-base64-data: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
 #        env:
-#          WERF_SET_ENV_URL: "envUrl=http://158.160.62.182:30080"
       - name: Deploy to Kubernetes apply
         run: |
 #          kubectl get pod,svc,deployment -n monitoring
