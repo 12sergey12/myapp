@@ -58,7 +58,7 @@ jobs:
 #          echo "${{ secrets.KUBE_CONFIG_BASE64_DATA }}" > $HOME/.kube/config
 #          chmod 600 $HOME/.kube/config
       - name: Setup Kubeconfig
-        uses: azure/setup-kubectl@v4 
+        uses: azure/setup-kubectl@v1 
 #      - name: Setup Kubeconfig 2    
 #        uses: azure/setup-kubectl@v1
 #      - name: Checkout      
