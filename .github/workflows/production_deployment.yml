@@ -38,7 +38,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ env.IMAGE_TAG }}:${{ github.ref_name }}
+          tags: ${{ env.IMAGE_TAG }}:${{ env.VERSION }}
   deploy:
     needs: build-and-push
     name: Deploy to Kubernetes
@@ -47,10 +47,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Download repository
-        uses: actions/download-artifact@v2
-        with:
-          name: repository
+#      - name: Download repository
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: repository
       - name: Create kube config
         run: |
           mkdir -p $HOME/.kube/
