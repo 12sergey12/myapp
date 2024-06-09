@@ -53,9 +53,9 @@ jobs:
         uses: azure/setup-kubectl@v4
 #        with:
 #          version: '1.19.0'          
-#        uses: actions/checkout@v4
-#      - name: Configure Kubernetes CLI
-#        uses: azure/k8s-set-context@v4
+        uses: actions/checkout@v4
+      - name: Configure Kubernetes CLI
+        uses: azure/k8s-set-context@v4
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
