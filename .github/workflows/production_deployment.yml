@@ -39,6 +39,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ env.IMAGE_TAG }}:${{ env.VERSION }}
+  
   deploy:
     needs: build-and-push
     name: Deploy to Kubernetes
@@ -46,19 +47,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 #      - name: Download repository
 #        uses: actions/download-artifact@v2
 #        with:
 #          name: repository
-      - name: Create kube config
+      - name: Create kubeconfig
         run: |
           mkdir -p $HOME/.kube/
           echo "${{ secrets.KUBE_CONFIG_BASE64_DATA }}" > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
-      - name: Set up Kubeconfig
-#        uses: azure/setup-kubectl@v4   
-#         uses: azure/setup-kubectl@v1
+      - name: Setup Kubeconfig
+        uses: azure/setup-kubectl@v4   
+        uses: azure/setup-kubectl@v1
 #      - name: Checkout      
 #        uses: actions/checkout@v4
 #      - name: Configure Kubernetes CLI
