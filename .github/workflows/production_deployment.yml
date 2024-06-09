@@ -57,7 +57,8 @@ jobs:
           echo "${{ secrets.KUBE_CONFIG_BASE64_DATA }}" > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
       - name: Set up Kubeconfig
-        uses: azure/setup-kubectl@v4   
+#        uses: azure/setup-kubectl@v4   
+         uses: azure/setup-kubectl@v1
       - name: Checkout      
         uses: actions/checkout@v4
 #      - name: Configure Kubernetes CLI
