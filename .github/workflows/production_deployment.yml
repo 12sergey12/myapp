@@ -40,7 +40,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
+      - name: Download repository
+        uses: actions/download-artifact@v2
+        with:
+          name: repository
+      - name: Create kube config
+        run: |
+          mkdir -p $HOME/.kube/
+          echo "${{ secrets.KUBE_CONFIG_BASE64_DATA }}" > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+      - name: Install helm
       - name: Set up Kubeconfig
         uses: azure/setup-kubectl@v4
         with:
@@ -51,21 +60,20 @@ jobs:
 #        with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
-      - name: Checkout code
-        uses: actions/checkout@v4
+#      - name: Checkout code
+#        uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-
-      - name: Converge
-        uses: werf/actions/converge@v1.2
-        with:
-          env: production
+#          fetch-depth: 0
+#      - name: Converge
+#        uses: werf/actions/converge@v1.2
+#        with:
+#          env: production
           kube-config-base64-data: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
         env:
-          WERF_SET_ENV_URL: "envUrl=http://158.160.62.182:30080"
+#          WERF_SET_ENV_URL: "envUrl=http://158.160.62.182:30080"
       - name: Deploy to Kubernetes apply
         run: |
-          kubectl get pod,svc,deployment -n monitoring
+#          kubectl get pod,svc,deployment -n monitoring
           kubectl apply -f ./myapp/deploy.yaml         
 #          helm upgrade nginx ./nginx-1.0.0.tgz#name: Production Deployment
 #on:
