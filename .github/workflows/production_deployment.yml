@@ -43,19 +43,19 @@ jobs:
 #        uses: actions/download-artifact@v2
 #        with:
 #          name: repository
-#      - name: Create kube config
-#        run: |
-#          mkdir -p $HOME/.kube/
-#          echo "${{ secrets.KUBE_CONFIG_BASE64_DATA }}" > $HOME/.kube/config
-#          chmod 600 $HOME/.kube/config
+      - name: Create kube config
+        run: |
+          mkdir -p $HOME/.kube/
+          echo "${{ secrets.KUBE_CONFIG_BASE64_DATA }}" > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
 #      - name: Install helm
-#      - name: Set up Kubeconfig
-#        uses: azure/setup-kubectl@v4
+      - name: Set up Kubeconfig
+        uses: azure/setup-kubectl@v4
 #        with:
 #          version: '1.19.0'          
-        uses: actions/checkout@v4
-      - name: Configure Kubernetes CLI
-        uses: azure/k8s-set-context@v4
+#        uses: actions/checkout@v4
+#      - name: Configure Kubernetes CLI
+#        uses: azure/k8s-set-context@v4
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
