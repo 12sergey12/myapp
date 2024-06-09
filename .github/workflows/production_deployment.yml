@@ -73,7 +73,9 @@ jobs:
 #        uses: werf/actions/converge@v1.2
 #        with:
 #          env: production
-          kube-config-base64-data: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
+#          kube-config-base64-data: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
 #        env:
       - name: Deploy to Kubernetes apply
         run: |
