@@ -1,5 +1,4 @@
 name: myapp
-
 on:
   push:
     branches:
@@ -64,7 +63,6 @@ jobs:
       - name: Apply Kubernetes manifests
         run: |
           kubectl apply -f ./myapp/deploy.yaml
-
 #      - name: Checkout
 #        uses: actions/checkout@v3
 #      - name: Download repository
