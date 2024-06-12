@@ -60,7 +60,7 @@ jobs:
         run: |
           yq e -i '.spec.template.spec.containers[0].image = env.IMAGE_TAG' ./myapp/deploy.yaml
         env:
-          IMAGE_TAG: 12sergey12/myapp:${{ github.sha }}
+          IMAGE_TAG: 12sergey12/myapp:${{ env.VERSION }}
 
       - name: Create kubeconfig
         run: |
