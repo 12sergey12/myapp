@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+
 env:
   IMAGE_TAG: 12sergey12/myapp
   RELEASE_NAME: myapp
