@@ -79,6 +79,10 @@ jobs:
           sed -i "s|image: 12sergey12/myapp:.*|image: ${{ env.IMAGE_TAG }}|" ./myapp/deploy.yaml
         env:
           IMAGE_TAG: 12sergey12/myapp:${{ env.VERSION }}
+      
+      - name Replace variable in index.html
+        run: |
+          sed -i 's/$IMAGE_TAG/'"${IMAGE_TAG}"'/g' index.html
 
       - name: Create kubeconfig
         run: |
