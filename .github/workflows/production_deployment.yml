@@ -40,6 +40,7 @@ jobs:
           push: true
           tags: ${{ env.IMAGE_TAG }}:${{ env.VERSION }}
 
+
   deploy:
     needs: build-and-push
     name: Deploy to Kubernetes
