@@ -58,7 +58,7 @@ jobs:
 
       - name: Update image tag in deploy.yaml
         run: |
-        yq e -i '.spec.template.spec.containers[0].image = env.IMAGE_TAG' ./myapp/deploy.yaml
+          yq e -i '.spec.template.spec.containers[0].image = env.IMAGE_TAG' ./myapp/deploy.yaml
         env:
           IMAGE_TAG: 12sergey12/myapp:${{ github.sha }}
 
