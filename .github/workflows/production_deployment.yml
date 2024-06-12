@@ -63,7 +63,7 @@ jobs:
 #          IMAGE_TAG: 12sergey12/myapp:${{ github.sha }}
       - name: Replace image tag in deploy.yaml
         run: |
-          sed -i "s|image: 12sergey12/myapp:.*|image: ${{ env.IMAGE_TAG }}|" ./myapp/deploy.yaml
+          sed -i -y "s|image: 12sergey12/myapp:.*|image: ${{ env.IMAGE_TAG }}|" ./myapp/deploy.yaml
         env:
           IMAGE_TAG: 12sergey12/myapp:${{ env.VERSION }}
 
