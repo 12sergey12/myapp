@@ -7,7 +7,15 @@
 </head>
 
 <body>
-    <h1>I’m DevOps Engineer! BaranovSAVersion: $IMAGE_TAG </h1>
-</body>
+    <h1>I’m DevOps Engineer! BaranovSA </h1>
+    <p>v: <span id="imageVersion">Loading...<span></p>
 
-</html>
+   <script>
+       fetch('/image-version.txt')
+           .then(response => response.text())
+           .then(data => {
+               document.getElementById('imageVersion').innerText = data.trim();
+           });
+   <script>
+</body> 
+</html> 
