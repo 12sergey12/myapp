@@ -85,7 +85,7 @@ jobs:
           IMAGE_TAG: 12sergey12/myapp:${{ env.VERSION }}
       
       - name: Create kubeconfig
-        if: env.DEPLOY == 'true' 
+#        if: env.DEPLOY == 'true' 
         run: |
           mkdir -p $HOME/.kube/
       - name: Authenticate to Kubernetes cluster
