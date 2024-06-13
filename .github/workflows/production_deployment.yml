@@ -26,7 +26,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: version from commit messages
         run: |
-          VERSION=$(git log -1 --pretty=format:%s )
+          VERSION=$(git log -1 --pretty=format:%s | grep -oP 'v\d+\.\d+\.\d+')
           if [[ ! -z "$VERSION" ]]; then
             echo "VERSION=$VERSION" >> $GITHUB_ENV
           else
