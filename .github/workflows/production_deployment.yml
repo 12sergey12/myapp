@@ -35,8 +35,8 @@ jobs:
             echo "No version found in the commit message"
             exit 1
           fi
-#      - name: Setup Docker Buildx
-#        uses: docker/setup-buildx-action@v3
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
