@@ -36,8 +36,6 @@ jobs:
             echo "No version found in the commit message"
             exit 1
           fi
-      - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v3
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
@@ -70,7 +68,7 @@ jobs:
           version: 'v1.20.0'
 
       - name: version from commit messages
-        run: |
+#        run: |
 #          COMMIT_MESSAGE=$(git log -1 --pretty=format%B)
 #          if [[ "$COMMIT_MESSAGE" == v* ]]; then
 #            echo "DEPLOY=true" >> $GITHUB_ENV
