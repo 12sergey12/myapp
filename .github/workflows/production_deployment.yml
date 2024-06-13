@@ -92,7 +92,7 @@ jobs:
           sed -i "s|image: 12sergey12/myapp:.*|image: ${{ env.IMAGE_TAG }}|" ./myapp/deploy.yaml
         env:
 #          IMAGE_TAG: 12sergey12/myapp:${{ env.VERSION }}
-         IMAGE_TAG: 12sergey12/myapp:${{ env.GITHUB }}
+         IMAGE_TAG: 12sergey12/myapp:${{ env.VERSION }}
       
       - name: Create kubeconfig
 #        if: env.DEPLOY == 'true' 
