@@ -52,8 +52,8 @@ jobs:
     name: Deploy to Kubernetes
     id: check_commit
     run: |
-      COMMIT_MESSAGE=$(git log -1 --pretty=%B)
-      IF [[ "$COMMIT_MESSAGE" == v* ]]; then
+      COMMIT_MESSAGE=$(git log -1 --pretty=format%B)
+      if [[ "$COMMIT_MESSAGE" == v* ]]; then
       echo "DEPLOY=true" >> $GITHUB_ENV
    else 
      echo "DEPLOY=false" >>$GITHUB_ENV
