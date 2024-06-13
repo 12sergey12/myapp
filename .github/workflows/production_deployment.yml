@@ -50,7 +50,7 @@ jobs:
   deploy:
     needs: build-and-push
     name: Deploy to Kubernetes
-    id: check_commit
+#    id: check_commit
     run: |
       COMMIT_MESSAGE=$(git log -1 --pretty=format%B)
       if [[ "$COMMIT_MESSAGE" == v* ]]; then
