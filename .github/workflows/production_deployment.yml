@@ -29,7 +29,7 @@ jobs:
 
       - name: Extract version from commit messages
         run: |
-          VERSION=$(git log -1 --pretty=format:%B | grep -oP 'v\d+\.\d+\.\d+')
+          VERSION=$(git log -1 --pretty=format:%B)
           if [[ ! -z "$VERSION" ]]; then
             echo "VERSION=$VERSION" >> $GITHUB_ENV
           else
