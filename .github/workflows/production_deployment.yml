@@ -76,9 +76,8 @@ jobs:
             echo "DEPLOY=true" >> $GITHUB_ENV
           else 
            echo "DEPLOY=false" >>$GITHUB_ENV
-        fi
-#    if: startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref, 'refs/tags/v')
-
+         fi
+ 
 #    if: startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref, 'refs/tags/v')
 
 #          VERSION=$(git log -1 --pretty=format:%B )
