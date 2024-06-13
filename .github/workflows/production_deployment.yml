@@ -58,15 +58,15 @@ jobs:
         with:
           version: 'v1.20.0'
 
-      - name: version from commit messages
-        run: |
-          VERSION=$(git log -1 --pretty=format:%s )
-          if [[ ! -z "$VERSION" ]]; then
-            echo "VERSION=$VERSION" >> $GITHUB_ENV
-          else
-            echo "No version found in the commit message"
-            exit 1
-          fi
+#      - name: version from commit messages
+#        run: |
+#          VERSION=$(git log -1 --pretty=format:%s )
+#          if [[ ! -z "$VERSION" ]]; then
+#            echo "VERSION=$VERSION" >> $GITHUB_ENV
+#          else
+#            echo "No version found in the commit message"
+#            exit 1
+#          fi
       - name: Replace image tag in deploy.yaml
         run: |
           sed -i "s|image: 12sergey12/myapp:.*|image: ${{ env.IMAGE_TAG }}|" ./myapp/deploy.yaml
