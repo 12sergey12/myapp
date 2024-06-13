@@ -75,7 +75,7 @@ jobs:
           if [[ "$COMMIT_MESSAGE" == v* ]]; then
             echo "DEPLOY=true" >> $GITHUB_ENV
           else 
-           echo "DEPLOY=false" >>$GITHUB_ENV
+           echo "DEPLOY=false" >> $GITHUB_ENV
           fi
  
 #    if: startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref, 'refs/tags/v')
