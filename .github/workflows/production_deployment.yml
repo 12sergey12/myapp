@@ -84,7 +84,7 @@ jobs:
           if [[ "$VERSION" ==v* ]]; then
             echo "VERSION=$VERSION" >> $GITHUB_ENV
           else
-            echo "DEPLOY=false" >> $GITHUB_EN"
+            echo "VERSION=false" >> $GITHUB_EN"
 #            exit 1
           fi
 
